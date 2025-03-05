@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation with RegExp</title>
+    <style>
+        .error { border: 2px solid red; }
+        .success { border: 2px solid green; }
+        .error-message { color: red; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <h1>Form Validation with JavaScript RegExp</h1>
+    <form id="validationForm">
+        <div>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" placeholder="John Doe">
+            <span class="error-message" id="fullNameError"></span>
+        </div>
+        <div>
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="john@example.com">
+            <span class="error-message" id="emailError"></span>
+        </div>
+        <div>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="1234567890">
+            <span class="error-message" id="phoneError"></span>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Password123">
+            <span class="error-message" id="passwordError"></span>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="successMessage" style="color: green; display: none;">All fields are valid!</p>
 
+    <script src="script.js"></script>
+</body>
+</html>
