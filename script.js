@@ -1,87 +1,100 @@
-// Get form and input elements
-const form = document.getElementById('validationForm');
-const fullNameInput = document.getElementById('fullName');
-const emailInput = document.getElementById('email');
-const phoneInput = document.getElementById('phone');
-const passwordInput = document.getElementById('password');
-const successMessage = document.getElementById('successMessage');
-
-// Regular Expressions for validation
-const nameRegex = /^[A-Za-z\s]+$/; // Only alphabetic characters and spaces
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Valid email format
-const phoneRegex = /^\d{10,15}$/; // Only digits, 10-15 characters
-const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/; // At least 8 chars, one uppercase, one lowercase, one number
-
-// Function to validate full name
-function validateFullName() {
-    if (!nameRegex.test(fullNameInput.value)) {
-        fullNameInput.classList.add('error');
-        document.getElementById('fullNameError').textContent = 'Invalid name (only letters and spaces allowed).';
-        return false;
-    } else {
-        fullNameInput.classList.remove('error');
-        document.getElementById('fullNameError').textContent = '';
-        return true;
+document.addEventListener('DOMContentLoaded', function() {
+    // Get form elements
+    const form = document.getElementById('registrationForm');
+    const fullName = document.getElementById('fullName');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const password = document.getElementById('password');
+    
+    // Get error message elements
+    const fullNameError = document.getElementById('fullNameError');
+    const emailError = document.getElementById('emailError');
+    const phoneError = document.getElementById('phoneError');
+    const passwordError = document.getElementById('passwordError');
+    const successMessage = document.getElementById('successMessage');
+    
+    // Regular expressions for validation
+    const nameRegex = /^[A-Za-z\s]+$/;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const phoneRegex = /^\d{10,15}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    
+    // Validation functions
+    function validateFullName() {
+        if (!nameRegex.test(fullName.value.trim())) {
+            fullName.classList.add('error');
+            fullNameError.textContent = 'Name should contain only alphabets and spaces';
+            return false;
+        } else {
+            fullName.classList.remove('error');
+            fullNameError.textContent = '';
+            return true;
+        }
     }
-}
-
-// Function to validate email
-function validateEmail() {
-    if (!emailRegex.test(emailInput.value)) {
-        emailInput.classList.add('error');
-        document.getElementById('emailError').textContent = 'Invalid email format.';
-        return false;
-    } else {
-        emailInput.classList.remove('error');
-        document.getElementById('emailError').textContent = '';
-        return true;
+    
+    function validateEmail() {
+        if (!emailRegex.test(email.value.trim())) {
+            email.classList.add('error');
+            emailError.textContent = 'Please enter a valid email address';
+            return false;
+        } else {
+            email.classList.remove('error');
+            emailError.textContent = '';
+            return true;
+        }
     }
-}
-
-// Function to validate phone number
-function validatePhone() {
-    if (!phoneRegex.test(phoneInput.value)) {
-        phoneInput.classList.add('error');
-        document.getElementById('phoneError').textContent = 'Invalid phone number (10-15 digits only).';
-        return false;
-    } else {
-        phoneInput.classList.remove('error');
-        document.getElementById('phoneError').textContent = '';
-        return true;
+    
+    function validatePhone() {
+        if (!phoneRegex.test(phone.value.trim())) {
+            phone.classList.add('error');
+            phoneError.textContent = 'Phone number should contain 10-15 digits only';
+            return false;
+        } else {
+            phone.classList.remove('error');
+            phoneError.textContent = '';
+            return true;
+        }
     }
-}
-
-// Function to validate password
-function validatePassword() {
-    if (!passwordRegex.test(passwordInput.value)) {
-        passwordInput.classList.add('error');
-        document.getElementById('passwordError').textContent = 'Password must be at least 8 characters, including one uppercase, one lowercase, and one number.';
-        return false;
-    } else {
-        passwordInput.classList.remove('error');
-        document.getElementById('passwordError').textContent = '';
-        return true;
+    
+    function validatePassword() {
+        if (!passwordRegex.test(password.value)) {
+            password.classList.add('error');
+            passwordError.textContent = 'Password must be at least 8 characters with at least one uppercase letter, one lowercase letter, and one number';
+            return false;
+        } else {
+            password.classList.remove('error');
+            passwordError.textContent = '';
+            return true;
+        }
     }
-}
-
-// Real-time validation as the user types
-fullNameInput.addEventListener('input', validateFullName);
-emailInput.addEventListener('input', validateEmail);
-phoneInput.addEventListener('input', validatePhone);
-passwordInput.addEventListener('input', validatePassword);
-
-// Form submission handler
-form.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent form submission
-
-    const isNameValid = validateFullName();
-    const isEmailValid = validateEmail();
-    const isPhoneValid = validatePhone();
-    const isPasswordValid = validatePassword();
-
-    if (isNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
-        successMessage.style.display = 'block';
-    } else {
-        successMessage.style.display = 'none';
-    }
+    
+    // Add event listeners for real-time validation
+    fullName.addEventListener('input', validateFullName);
+    email.addEventListener('input', validateEmail);
+    phone.addEventListener('input', validatePhone);
+    password.addEventListener('input', validatePassword);
+    
+    // Form submission
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Validate all fields
+        const isNameValid = validateFullName();
+        const isEmailValid = validateEmail();
+        const isPhoneValid = validatePhone();
+        const isPasswordValid = validatePassword();
+        
+        // Check if all validations passed
+        if (isNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
+            // Show success message
+            successMessage.style.display = 'block';
+            
+            // Optionally, reset form after successful submission
+            // form.reset();
+        } else {
+            // Hide success message if validation fails
+            successMessage.style.display = 'none';
+        }
+    });
 });
+           
