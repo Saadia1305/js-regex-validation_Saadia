@@ -3,94 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Validation</title>
+    <title>Form Validation with RegExp</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            max-width: 400px;
+            max-width: 600px;
             margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: bold;
         }
         input {
             width: 100%;
             padding: 8px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             border-radius: 4px;
+            box-sizing: border-box;
         }
-        input:focus {
-            border-color: #007BFF;
-            outline: none;
-        }
-        button {
-    background-color: #28a745; 
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #218838; 
-}
-        
-        .error {
-            border-color: red;
+        input.error {
+            border: 2px solid #ff0000;
         }
         .error-message {
-            color: red;
-            font-size: 0.9em;
-            margin-top: -10px;
-            margin-bottom: 10px;
+            color: #ff0000;
+            font-size: 0.8em;
+            margin-top: 5px;
+            min-height: 1em;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .success-message {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>Form Validation</h1>
-    <form id="validationForm">
-        <!-- Full Name Field -->
-        <div>
-            <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" name="fullName" placeholder="Saadia Hussein" required>
-            <span class="error-message" id="fullNameError"></span>
+    <h1>Registration Form</h1>
+    <form id="registrationForm" novalidate>
+        <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name">
+            <div class="error-message" id="fullNameError"></div>
         </div>
-
-        <!-- Email Address Field -->
-        <div>
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" placeholder="saadia@example.com" required>
-            <span class="error-message" id="emailError"></span>
+        
+        <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+            <div class="error-message" id="emailError"></div>
         </div>
-
-        <!-- Phone Number Field -->
-        <div>
-            <label for="phone">Phone Number:</label>
-            <input type="text" id="phone" name="phone" placeholder="1234567890" required>
-            <span class="error-message" id="phoneError"></span>
+        
+        <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+            <div class="error-message" id="phoneError"></div>
         </div>
-
-        <!-- Password Field -->
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Password123" required>
-            <span class="error-message" id="passwordError"></span>
+        
+        <div class="form-group">
+            <label for="password">Password *</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+            <div class="error-message" id="passwordError"></div>
         </div>
-
-        <!-- Submit Button -->
+        
         <button type="submit">Submit</button>
     </form>
+    
+    <div class="success-message" id="successMessage">
+        Registration successful! All inputs are valid.
+    </div>
 
-    <!-- Success Message -->
-    <p id="successMessage" style="color: green; display: none;">All fields are valid!</p>
-
-    <!-- Link to JavaScript File -->
     <script src="script.js"></script>
 </body>
 </html>
+       
+
+
+      
